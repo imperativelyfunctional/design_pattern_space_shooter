@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu7h5em3ver55"]
+
+[ext_resource type="Texture2D" uid="uid://cb64755dc1d3a" path="res://scenes/bullets/circular/circular.png" id="1_bvacr"]
+[ext_resource type="Script" path="res://scenes/bullets/circular/circular_bullet.gd" id="2_gmbpw"]
+
+[node name="FlameBullet" type="Sprite2D"]
+texture = ExtResource("1_bvacr")
+script = ExtResource("2_gmbpw")

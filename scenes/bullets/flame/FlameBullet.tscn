@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyf5a1brsovb"]
+
+[ext_resource type="Texture2D" uid="uid://ddjy54v7xhpap" path="res://scenes/bullets/flame/flame.png" id="1_hg5ff"]
+[ext_resource type="Script" path="res://scenes/bullets/flame/flame_bullet.gd" id="2_qfnde"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw5wd"]
+atlas = ExtResource("1_hg5ff")
+region = Rect2(0, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di3ja"]
+atlas = ExtResource("1_hg5ff")
+region = Rect2(25, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn8qj"]
+atlas = ExtResource("1_hg5ff")
+region = Rect2(50, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwovw"]
+atlas = ExtResource("1_hg5ff")
+region = Rect2(75, 0, 25, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5fgoa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw5wd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_di3ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn8qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwovw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="FlameBullet" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_5fgoa")
+autoplay = "default"
+frame_progress = 0.739755
+script = ExtResource("2_qfnde")

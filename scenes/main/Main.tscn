@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6uq3hv022sl2"]
+
+[ext_resource type="Shader" path="res://scenes/main/main.gdshader" id="1_nymc6"]
+[ext_resource type="Texture2D" uid="uid://xdpt5j2bsdla" path="res://scenes/fighter/fighter.png" id="2_qvdrv"]
+[ext_resource type="Script" path="res://scenes/fighter/fighter.gd" id="3_xl0ov"]
+[ext_resource type="PackedScene" uid="uid://cy32wbppp0n1p" path="res://scenes/fighter/Orb.tscn" id="4_er8bd"]
+
+[sub_resource type="Environment" id="Environment_nivty"]
+background_mode = 3
+ambient_light_source = 3
+glow_enabled = true
+glow_intensity = 5.15
+glow_strength = 0.94
+glow_blend_mode = 0
+glow_hdr_threshold = 0.63
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fem7u"]
+shader = ExtResource("1_nymc6")
+shader_parameter/iterations = 20
+shader_parameter/formuparam = 1.0
+shader_parameter/volsteps = 20
+shader_parameter/stepsize = 0.1
+shader_parameter/zoom = 0.8
+shader_parameter/tile = 0.5
+shader_parameter/speed = 0.001
+shader_parameter/brightness = 0.002
+shader_parameter/darkmatter = 0.1
+shader_parameter/distfading = 0.65
+shader_parameter/saturation = 0.75
+
+[node name="Main" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nivty")
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fem7u")
+offset_right = 600.0
+offset_bottom = 800.0
+
+[node name="Fighter" type="Sprite2D" parent="."]
+self_modulate = Color(6.47, 1.18, 0.61, 1)
+position = Vector2(304, 642)
+texture = ExtResource("2_qvdrv")
+script = ExtResource("3_xl0ov")
+
+[node name="LeftOrb" parent="Fighter" instance=ExtResource("4_er8bd")]
+position = Vector2(-93, 40)
+
+[node name="RightOrb" parent="Fighter" instance=ExtResource("4_er8bd")]
+position = Vector2(90, 40)
+flip_h = true
+
+[node name="ChangeBulletTimer" type="Timer" parent="Fighter"]
+wait_time = 4.0
+autostart = true
+
+[node name="LeftTrails" type="CPUParticles2D" parent="Fighter"]
+position = Vector2(-20, 86)
+amount = 1000
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(2.08165e-12, 100)
+linear_accel_min = 28.22
+linear_accel_max = 59.45
+radial_accel_min = -10.08
+radial_accel_max = 20.15
+hue_variation_min = 0.21
+hue_variation_max = 0.5
+
+[node name="RightTrails" type="CPUParticles2D" parent="Fighter"]
+position = Vector2(15, 86)
+amount = 1000
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(2.08165e-12, 100)
+linear_accel_min = 28.22
+linear_accel_max = 59.45
+radial_accel_min = -10.08
+radial_accel_max = 20.15
+hue_variation_min = 0.21
+hue_variation_max = 0.5
+
+[connection signal="timeout" from="Fighter/ChangeBulletTimer" to="Fighter" method="_on_change_bullet_timer_timeout"]

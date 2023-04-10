@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc67fmav1f8tn"]
+
+[ext_resource type="Texture2D" uid="uid://xdpt5j2bsdla" path="res://scenes/fighter/fighter.png" id="1_85ws3"]
+[ext_resource type="Script" path="res://scenes/fighter/fighter.gd" id="2_t7e1x"]
+[ext_resource type="PackedScene" uid="uid://cy32wbppp0n1p" path="res://scenes/fighter/Orb.tscn" id="3_peknn"]
+
+[node name="Fighter" type="Sprite2D"]
+self_modulate = Color(6.47, 1.18, 0.61, 1)
+position = Vector2(304, 642)
+texture = ExtResource("1_85ws3")
+script = ExtResource("2_t7e1x")
+
+[node name="Left" parent="." instance=ExtResource("3_peknn")]
+position = Vector2(-93, 40)
+
+[node name="Right" parent="." instance=ExtResource("3_peknn")]
+position = Vector2(90, 40)
+flip_h = true
+
+[node name="ChangeBulletTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="TrailLeft" type="CPUParticles2D" parent="."]
+position = Vector2(-20, 86)
+amount = 1000
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(2.08165e-12, 100)
+linear_accel_min = 28.22
+linear_accel_max = 59.45
+radial_accel_min = -10.08
+radial_accel_max = 20.15
+hue_variation_min = 0.21
+hue_variation_max = 0.5
+
+[node name="TrailRight" type="CPUParticles2D" parent="."]
+position = Vector2(15, 86)
+amount = 1000
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(2.08165e-12, 100)
+linear_accel_min = 28.22
+linear_accel_max = 59.45
+radial_accel_min = -10.08
+radial_accel_max = 20.15
+hue_variation_min = 0.21
+hue_variation_max = 0.5
+
+[connection signal="timeout" from="ChangeBulletTimer" to="." method="_on_change_bullet_timer_timeout"]
